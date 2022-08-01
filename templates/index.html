@@ -11,9 +11,22 @@
 		var uploadimage = document.getElementById("imageupload"); 
 		var filename = document.getElementById("filename");
 		filename.value = event.target.files[0].name;
-		preview.style.width = '15%';
+		preview.style.width = '25%';
 		preview.src = URL.createObjectURL(event.target.files[0]);
 		preview.hidden = false;
+	}
+
+	//function for loading the engine
+	function loadEngine() {
+		var engine = document.getElementById("engine");
+		var engines = {"Python":"python","MATLAB":"matlab"};
+		for(var e in engines)
+			if(engine.value != e) {
+				document.getElementById(engines[e]).hidden = true;
+			}
+			else {
+				document.getElementById(engines[e]).hidden = false;
+			}
 	}
 
 	function resetPreview() {
@@ -31,8 +44,11 @@
 	h2 {
 		font-size: 2.5em;
 	}
-	input {
+	input,select,label{
 		font-size: 2em;
+	}
+	option {
+		font-size: 1.5em;
 	}
 	a {
 		color:black;
@@ -46,16 +62,41 @@
 		transition: 0.1s;
 	}
 	footer {
-		position: absolute;
+		position: relative;
 		bottom: 2.5%
 	}
 
 </style>
 
 <body>
-	<h1>Image Server</h1>
+	<h1>TheDoLab PhotoLab Server</h1>
 	<form action="/upload" method="post" enctype="multipart/form-data">
 		<h2>Upload an Image:</h2> 
+		<label for="engine">Select An Engine: </label>
+		<select selected="Python" id="engine" name="engine" onchange="loadEngine()" onload="loadEngine()">
+			<option value="Python">Python</option>
+			<option value="MATLAB">MATLAB</option>
+		</select>
+		<div id="python">
+			<label for="pythonop">Choose An Operation (Python): </label>
+			<select id="pythonop" name="pythonop">
+				<option value="Save">Save</option>
+				<option value="FFT">FFT</option>
+				<option value="Sharpen">Sharpen</option>
+				<option value="Laplacian">Laplacian</option>
+			</select>
+		</div>
+		<div id="matlab" hidden>
+			<label for="matlabop">Choose An Operation (MATLAB): </label>
+				<select id="matlabop" name="matlabop">
+					<option value="Save">Save</option>
+					<option value='FFT'>FFT</option>
+					<option value='Sharpen'>Sharpen</option>
+					<option value='Laplacian'>Laplacian</option>
+				</select>
+			</label>
+		</div>
+		<br>
 		<input type="file" accept='image/*' name="upload" id="imageupload" onchange="loadFile(event)"/>
 		<input type="hidden" name="filename" id="filename"/>
 		<br>
@@ -73,7 +114,7 @@
 
 <footer>
 	<a href="https://timothydo.me"><h2>Made by Timothy Do</h2></a>
-	<a href="https://github.com/dotimothy/ImageServer"><h2>Checkout the Github Repo 💻</h2></a>
+	<a href="https://github.com/dotimothy/PhotoLabServer"><h2>Checkout the Github Repo 💻</h2></a>
 	<a href="https://timothydo.me/thedolab"><h2>Checkout TheDoLab</a></h2></a>
 </footer>
 

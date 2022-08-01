@@ -1,12 +1,20 @@
-# PhotoLabServer Implemented in Python Flask
+# PhotoLabServer.py: Image Processing Web Server Implemented in Python Flask
 
 # Libraries 
 from flask import Flask, redirect, url_for, render_template, request, send_file
 import os
+import PhotoLab
 
 
 # Creating the app 
 app = Flask(__name__)
+
+# Static Variables
+engList = {'Python':'pythonop','MATLAB':'matlabop'}
+opList = {
+	'Python': {'FFT':PhotoLab.fftPy,'Sharpen':PhotoLab.sharpenPy,'Laplacian':PhotoLab.laplacianPy}, 
+	'MATLAB':{'FFT':PhotoLab.fftMat,'Sharpen':PhotoLab.sharpenMat,'Laplacian':PhotoLab.laplacianMat}
+}
 
 # Landing Page
 @app.route("/")
@@ -18,14 +26,25 @@ def upload():
 	if request.method == "POST": 
 		image = request.files['upload']
 		name = request.form['filename']
+		engine = request.form['engine']
+		
+		operation = request.form[engList[engine]]
 		if not image or not name:
 			return render_template('noimage.html')
 		if(not os.path.exists(os.getcwd() + '\\results')):
 			os.makedirs(os.getcwd() + '\\results')
+		if(operation != "Save"):
+			fname,ext = os.path.splitext(name)
+			name = f'{fname}_{operation}{ext}'
 		path = f'./results/{name}'
 		image.save(path)
+		if(operation != "Save"):
+			abPath = os.getcwd() + f'\\results\\{name}'
+			opList[engine][operation](abPath)
 		nl = '\n'
-		html = f"<h1 style='font-family:Courier'>Your Uploaded Image ({name})</h1>{nl}<br>{nl}" 
+		html = f"<h1 style='font-family:Courier'>Your Uploaded Image ({name})</h1>{nl}{nl}"
+		html = html + f"<h1 style='font-family:Courier'>Engine: {engine}</h1>{nl}{nl}"
+		html = html + f"<h1 style='font-family:Courier'>Operation: {operation}</h1>{nl}<br>{nl}"
 		html = html + f"<a href={path}><img width='50%' src={path} title={name}/></a>"
 		html = html + f"<h1 style='font-family:Courier'><a href='/'>Return to Homepage</a></h1>{nl}"
 		return html
