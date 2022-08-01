@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<head>
+	<title>TheDoLab Image Server</title>
+</head>
+
+<script>
+	//function for loading file
+	function loadFile(event) {
+		var preview = document.getElementById("preview");
+		var uploadimage = document.getElementById("imageupload"); 
+		var filename = document.getElementById("filename");
+		filename.value = event.target.files[0].name;
+		preview.style.width = '15%';
+		preview.src = URL.createObjectURL(event.target.files[0]);
+		preview.hidden = false;
+	}
+
+	function resetPreview() {
+		preview.hidden = true;
+	}
+</script>
+
+<style>
+	* {
+		font-family:  Courier;
+	}
+	h1 {
+		font-size:  3em;
+	}
+	h2 {
+		font-size: 2.5em;
+	}
+	input {
+		font-size: 2em;
+	}
+	a {
+		color:black;
+	}
+	a:hover {
+		color: blue;
+		transition: 0.1s;
+	}
+	a:active {
+		color: purple;
+		transition: 0.1s;
+	}
+	footer {
+		position: absolute;
+		bottom: 2.5%
+	}
+
+</style>
+
+<body>
+	<h1>Image Server</h1>
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<h2>Upload an Image:</h2> 
+		<input type="file" accept='image/*' name="upload" id="imageupload" onchange="loadFile(event)"/>
+		<input type="hidden" name="filename" id="filename"/>
+		<br>
+		<br>
+		<img hidden id="preview">
+		<br>
+		<br>
+		<input type="submit" value="Upload Image" />
+		<input type="reset" onclick="resetPreview()"/>
+	</form>
+	<br>
+	<a href="./collage"><h2>View the Collage!</h2></a>
+	
+</body>
+
+<footer>
+	<a href="https://timothydo.me"><h2>Made by Timothy Do</h2></a>
+	<a href="https://github.com/dotimothy/ImageServer"><h2>Checkout the Github Repo 💻</h2></a>
+	<a href="https://timothydo.me/thedolab"><h2>Checkout TheDoLab</a></h2></a>
+</footer>
+
+
+</html>
