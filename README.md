@@ -10,3 +10,6 @@ To view the site, go to [localhost](http://localhost) to view it locally. To vie
 # Network Specs
 Host: 0.0.0.0
 Port: 80 
+# GUI
+<img width='40%' src='docs/landing.png'/>
+<img width='40%' src='docs/result.png'/>
