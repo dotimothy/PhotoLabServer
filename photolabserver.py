@@ -1,4 +1,5 @@
 # PhotoLabServer.py: Image Processing Web Server Implemented in Python Flask
+# Author: Timothy Do
 
 # Libraries 
 from flask import Flask, redirect, url_for, render_template, request, send_file

@@ -1,4 +1,5 @@
 # PhotoLab.py: Image Processing Engine in Python/Piped to MATLAB
+# Author: Timothy Do
 
 # Libraries
 import os
@@ -32,3 +33,6 @@ def sharpenPy(path):
 
 def laplacianPy(path):
 	pass
+
+if __name__ == '__main__':
+	print('PhotoLab Can\'t be Run Individually 😂')
