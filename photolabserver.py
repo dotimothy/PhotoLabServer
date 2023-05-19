@@ -11,10 +11,11 @@ import PhotoLab
 app = Flask(__name__)
 
 # Static Variables
-engList = {'Python':'pythonop','MATLAB':'matlabop'}
+engList = {'Python':'pythonop','MATLAB':'matlabop','Upscayl':'upscaylop'}
 opList = {
 	'Python': {'FFT':PhotoLab.fftPy,'Sharpen':PhotoLab.sharpenPy,'Laplacian':PhotoLab.laplacianPy}, 
-	'MATLAB':{'FFT':PhotoLab.fftMat,'Sharpen':PhotoLab.sharpenMat,'Laplacian':PhotoLab.laplacianMat}
+	'MATLAB':{'FFT':PhotoLab.fftMat,'Sharpen':PhotoLab.sharpenMat,'Laplacian':PhotoLab.laplacianMat},
+	'Upscayl':{'Upscale':PhotoLab.upscayl}
 }
 
 # Landing Page
@@ -46,6 +47,7 @@ def upload():
 		html = html + f"<h1 style='font-family:Courier'>Engine: {engine}</h1>{nl}{nl}"
 		html = html + f"<h1 style='font-family:Courier'>Operation: {operation}</h1>{nl}<br>{nl}"
 		html = html + f"<a href={path}><img width='50%' src={path} title={name}/></a>"
+		html = html + f"<br><a href={path} download><button><h1 style='font-family:Courier'>Download</h1></button></a>"
 		html = html + f"<h1 style='font-family:Courier'><a href='/'>Return to Homepage</a></h1>{nl}"
 		return html
 	else:

@@ -47,5 +47,12 @@ def laplacianPy(path):
 	kernel = np.array([[1,1,1], [1,-8,1], [1,1,1]])
 	cv2.imwrite(path,cv2.filter2D(image,-1,kernel))
 
+#Upscayl Functions
+def upscayl(path):
+	original = os.getcwd()
+	os.chdir("C:\\Program Files\\Upscayl\\resources\\bin")
+	os.system(f"upscayl-realesrgan.exe -i \"{path}\" -o \"{path}\" -s 4 -m ..\\models -n realesrgan-x4plus-anime")
+	os.chdir(original)
+	
 if __name__ == '__main__':
 	print('PhotoLab Can\'t be Run Individually 😂')

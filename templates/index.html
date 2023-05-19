@@ -19,7 +19,7 @@
 	//function for loading the engine
 	function loadEngine() {
 		var engine = document.getElementById("engine");
-		var engines = {"Python":"python","MATLAB":"matlab"};
+		var engines = {"Python":"python","MATLAB":"matlab","Upscayl":"upscayl"};
 		for(var e in engines)
 			if(engine.value != e) {
 				document.getElementById(engines[e]).hidden = true;
@@ -76,6 +76,7 @@
 		<select selected="Python" id="engine" name="engine" onchange="loadEngine()" onload="loadEngine()">
 			<option value="Python">Python</option>
 			<option value="MATLAB">MATLAB</option>
+			<option value="Upscayl">Upscayl</option>
 		</select>
 		<div id="python">
 			<label for="pythonop">Choose An Operation (Python): </label>
@@ -96,6 +97,13 @@
 				</select>
 			</label>
 		</div>
+		<div id="upscayl" hidden>
+			<label for="upscaylop">Choose An Operation (Upscayl): </label>
+				<select id="upscaylop" name="upscaylop">
+					<option value="Upscale">Upscale</option>
+				</select>
+			</label>
+		</div>
 		<br>
 		<input type="file" accept='image/*' name="upload" id="imageupload" onchange="loadFile(event)"/>
 		<input type="hidden" name="filename" id="filename"/>
@@ -104,7 +112,7 @@
 		<img hidden id="preview">
 		<br>
 		<br>
-		<input type="submit" value="Upload Image" />
+		<input type="submit" value="Process Image" />
 		<input type="reset" onclick="resetPreview()"/>
 	</form>
 	<br>
