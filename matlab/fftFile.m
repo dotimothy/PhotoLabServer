@@ -1,5 +1,5 @@
 % fftFile(path) Generates a real FFT Image (center is DC) overwriting the file path 
-function fftFile(path)
+function F = fftFile(path)
     f = imread(path);
     if(size(f,3) > 1)
         f = rgb2gray(f); 

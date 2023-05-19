@@ -28,7 +28,6 @@ def upload():
 		image = request.files['upload']
 		name = request.form['filename']
 		engine = request.form['engine']
-		
 		operation = request.form[engList[engine]]
 		if not image or not name:
 			return render_template('noimage.html')
@@ -85,4 +84,4 @@ def collage():
 # Debug if the same file as run
 if __name__ == "__main__":
 	clear()
-	app.run(debug=True,host='0.0.0.0',port=80)
+	app.run(debug=True,host='0.0.0.0',port=8080)
